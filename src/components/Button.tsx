@@ -7,7 +7,7 @@ background-color: white;
 cursor: pointer;
 border: #ccc solid 1px;
 height: 32px;
-width: ${({ square }) => square ? "32px" : "64px"};
+width: ${({ square }) => square ? "32px" : "72px"};
 transition: all 0.5s;
 :hover{
   background-color: #ccc;
