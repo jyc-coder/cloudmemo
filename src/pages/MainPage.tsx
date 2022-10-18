@@ -86,7 +86,7 @@ const MainPage = () => {
               cursor: 'pointer',
             }}
           >
-            <Box
+            <Box className='memo-content'
               dangerouslySetInnerHTML={{
                 __html: value.content,
               }}

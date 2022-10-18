@@ -41,6 +41,7 @@ const MemoDetailPage = () => {
           }}
         >
           <Box
+            className="memo-content"
             dangerouslySetInnerHTML={{
               __html: memo.content,
             }}
