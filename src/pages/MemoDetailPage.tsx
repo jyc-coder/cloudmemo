@@ -1,14 +1,16 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import Box from '../components/Box';
 import Flex from '../components/Flex';
 import Memo from '../interfaces/Memo';
-import {VscChevronLeft, VscEdit, VscTrash} from 'react-icons/vsc';
+import {VscChevronLeft, VscCopy, VscEdit, VscLiveShare, VscTrash} from 'react-icons/vsc';
 import Button from '../components/Button';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 const MemoDetailPage = () => {
   const navigate = useNavigate();
+  const location = useLocation()
   const {id} = useParams();
   const [memo, setMemo] = useState<Memo | null>(null);
   useEffect(() => {
@@ -61,6 +63,26 @@ const MemoDetailPage = () => {
             gap: 8,
           }}
         >
+          <Button square onClick={() => {
+            window.navigator.share({
+              title: "클라우드 메모공유",
+              text: memo.content,
+              url:window.location.href
+            })
+          }}>
+            <VscLiveShare/>
+          </Button>
+          <CopyToClipboard
+            text={window.location.host + location.pathname}
+            onCopy={(str) => {
+             alert("복사되었습니다")
+            }}
+          >
+            <Button square={true} >
+              <VscCopy />
+            </Button>
+          </CopyToClipboard>
+
           <Button square={true} onClick={() => navigate('edit')}>
             <VscEdit />
           </Button>
@@ -68,14 +90,14 @@ const MemoDetailPage = () => {
             square={true}
             onClick={async () => {
               if (window.confirm('해당 메모를 제거할까요?')) {
-                 try {
-                   await axios.delete('/' + id);
-                   alert('제거가 완료되었습니다.');
-                 } catch (e) {
-                   alert((e as any).response.data.msg);
-                 }
+                try {
+                  await axios.delete('/' + id);
+                  alert('제거가 완료되었습니다.');
+                } catch (e) {
+                  alert((e as any).response.data.msg);
+                }
               }
-               
+
               navigate('/');
             }}
           >
