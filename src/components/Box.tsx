@@ -27,7 +27,7 @@ export type BoxProps = LayoutProps &
   SpaceProps &
   PositionProps;
 
-const Box = styled.div<BoxProps>`
+const Box = styled.div<BoxProps >`
   ${layout}
   ${color}
   ${border}
@@ -36,6 +36,7 @@ const Box = styled.div<BoxProps>`
   ${typography}
   ${space}
   ${position}
+ 
 `;
 
 export default Box;

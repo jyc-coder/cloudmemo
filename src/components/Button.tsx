@@ -2,11 +2,12 @@ import styled from '@emotion/styled';
 import {layout, color, border, display, flexbox, typography, space, position} from 'styled-system';
 import {BoxProps} from './Box';
 
-const Button = styled.button<BoxProps>`
+const Button = styled.button<BoxProps & { square?:boolean}>`
 background-color: white;
+cursor: pointer;
 border: #ccc solid 1px;
 height: 32px;
-width: 64px;
+width: ${({ square }) => square ? "32px" : "64px"};
 transition: all 0.5s;
 :hover{
   background-color: #ccc;
